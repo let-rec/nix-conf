@@ -122,7 +122,7 @@
     profiles.default = {
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
-      extensions = (with pkgs.vscode-extensions;[
+      extensions = (with pkgs.vscode-extensions; [
         vscodevim.vim
         rust-lang.rust-analyzer
         jnoortheen.nix-ide
