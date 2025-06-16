@@ -8,6 +8,7 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils"; 
+    
   };
   outputs = {
     self,
@@ -15,10 +16,7 @@
     home-manager,
     flake-utils,
     ...
-  } @ inputs:
-
-    let 
-      lib = nixpkgs.lib;
+  } @ inputs: let 
       outputs = self;
     in 
       flake-utils.lib.eachDefaultSystem (
@@ -33,7 +31,10 @@
       {
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [ ./nixos/configuration.nix ];
+          modules = [ 
+            ./nixos/configuration.nix
+            ./home.nix
+           ];
         };
       };
 }
