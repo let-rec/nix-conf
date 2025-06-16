@@ -25,16 +25,20 @@
         in 
         {
           devShells.default = import ./shell.nix {inherit pkgs;};
+          formatter = nixpkgs.legacyPackages.${system}.alejandra;
         }
       )
       // 
       {
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ 
+          # inherit inputs outputs;
+          modules = [
             ./nixos/configuration.nix
-            ./home.nix
+            home-manager.nixosModules.home-manager
            ];
+           specialArgs = {
+            inherit inputs outputs;
+           };
         };
       };
 }

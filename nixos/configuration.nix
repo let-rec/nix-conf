@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, outputs, ... }:
 
 {
   imports = 
@@ -6,10 +6,9 @@
     ./hardware-configuration.nix
   ];
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
   home-manager = {
-    user.letrec = import "../home.nix";
+    extraSpecialArgs = { inherit inputs outputs; };
+    users.letrec = import ../home.nix;
   };
 
 
