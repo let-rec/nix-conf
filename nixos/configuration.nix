@@ -1,19 +1,16 @@
 { config, pkgs, ... }:
 
 {
-    imports = 
-  let 
-    home-manager = (builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz");
-  in
-      [
-        ./hardware-configuration.nix
-        (import "${home-manager}/nixos")
-      ];
-    home-manager.users.eve = {pkgs, ... }: {
-      home.packages = [ pkgs.atool pkgs.httpie ];
-      programs.bash.enable = true;
-      home.stateVersion = "25.05";
-    };
+  imports = 
+  [
+    ./hardware-configuration.nix
+  ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager = {
+    user.letrec = import "../home.nix";
+  };
 
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -115,20 +112,6 @@
     rustc
     cargo
   ];
-
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode;
-    profiles.default = {
-      enableUpdateCheck = false;
-      enableExtensionUpdateCheck = false;
-      extensions = (with pkgs.vscode-extensions; [
-        vscodevim.vim
-        rust-lang.rust-analyzer
-        jnoortheen.nix-ide
-      ]);
-    };
-  };
 
   system.stateVersion = "25.05";
 
