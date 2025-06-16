@@ -31,7 +31,6 @@
       // 
       {
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-          # inherit inputs outputs;
           modules = [
             ./nixos/configuration.nix
             home-manager.nixosModules.home-manager
