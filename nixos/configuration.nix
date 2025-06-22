@@ -11,9 +11,11 @@
     users.letrec = import ../home.nix;
   };
 
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # boot.kernelParams = [
+  #   "nvidia.NVreg_RegistryDwords=EnableBrightnessControl=1"
+  # ]
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -22,9 +24,22 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "Asia/Tashkent";
+  time.timeZone = "Etc/GMT-5";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    # inputMethod = {
+    #   enable = true;
+    #   type = true;
+    #   ibus.engines = with pkgs.ibus.engines; [
+    #     mozc
+    #   ];
+    # };
+    # extraLocationSettings = {
+    #   LANGUAGE = "ja_JP";
+    #   LC_ALL = "ja_JP.UTF-8";
+    # };
+  };
 
   services.xserver = {
     enable = true;
@@ -40,6 +55,7 @@
     desktopManager.gnome = {
       enable = true;
     };
+    
   };
 
   services.printing.enable = true;
@@ -87,6 +103,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -111,6 +128,24 @@
     rustc
     cargo
   ];
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+    gedit
+    cheese
+    gnome-music
+    gnome-console
+    gnome-terminal
+    epiphany
+    geary
+    evince
+    totem
+    tali
+    iagno
+    hitori
+    atomix
+    seahorse
+  ]);
 
   system.stateVersion = "25.05";
 

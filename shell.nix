@@ -20,5 +20,10 @@
       #just
       #sops
     ];
+
+    buildInputs = with pkgs; [
+      openssl
+      pkg-config
+    ];
     
   }

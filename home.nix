@@ -11,7 +11,7 @@
 
   home.packages = with pkgs; [
     git
-    zed
+    zed-editor
   ];
 
 nixpkgs = {
@@ -23,18 +23,4 @@ nixpkgs = {
 
 
   programs.home-manager.enable = true;
-
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscode;
-    profiles.default = {
-      enableUpdateCheck = false;
-      enableExtensionUpdateCheck = false;
-      extensions = (with pkgs.vscode-extensions; [
-        vscodevim.vim
-        rust-lang.rust-analyzer
-        jnoortheen.nix-ide
-      ]);
-    };
-  };
 }
