@@ -3,18 +3,6 @@
     programs.fastfetch = {
       enable = true;
       settings = {
-        logo = {
-          source = "orzklv";
-          padding = {
-            top = 3;
-            right = 3;
-            left = 3;
-          };
-        };
-        display = {
-          size = {binaryPrefix = "si";};
-          color = "black";
-        };
         modules = [
           "title"
           "separator"
