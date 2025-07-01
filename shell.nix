@@ -21,9 +21,5 @@
       #sops
     ];
 
-    buildInputs = with pkgs; [
-      openssl
-      pkg-config
-    ];
-    
+    NIX_CONFIG = "extra-experimental-features = nix-command flakes";    
   }

@@ -6,28 +6,25 @@
     ./hardware-configuration.nix
   ];
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    users.letrec = import ../home.nix;
-  };
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # boot.kernelParams = [
-  #   "nvidia.NVreg_RegistryDwords=EnableBrightnessControl=1"
-  # ]
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
+  # boot.kernelParams = [
+  #   "nvidia.NVreg_RegistryDwords=EnableBrightnessControl=1"
+  # ]
+  boot.supportedFilesystems = [ "ntfs" ];
 
-  networking.hostName = "nixos";
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; };
+    users.letrec = import ../../home.nix;
+  };
+  
   networking.networkmanager.enable = true;
 
   time.timeZone = "Etc/GMT-5";
-
   i18n = {
     defaultLocale = "en_US.UTF-8";
+    ### JAPANESE
     # inputMethod = {
     #   enable = true;
     #   type = true;
@@ -55,14 +52,15 @@
     desktopManager.gnome = {
       enable = true;
     };
-    
+    videoDrivers = ["nvidia"];
   };
 
-  services.printing.enable = true;
   services.openssh.enable = true;
   services.pcscd.enable = true;
+  services.printing.enable = true;
   services.earlyoom.enable = true;
   services.earlyoom.freeMemThreshold = 5;
+  services.thermald.enable = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -72,14 +70,13 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+  services.e-imzo.enable = true;
 
+  users.defaultUserShell = pkgs.zsh;
   users.users.letrec = {
     isNormalUser = true;
-    description = "let-rec";
     extraGroups = [ "networkmanager" "wheel" ];
   };
-
-  programs.steam.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -87,7 +84,9 @@
     pinentryPackage = pkgs.pinentry-curses;
   };
   
-
+  hardware.graphics = {
+    enable = true;
+  };
   hardware.nvidia = {
     open = false;
     modesetting.enable = true;
@@ -124,18 +123,18 @@
     git
     vscode
     element-desktop
-    discord
-    rustc
-    cargo
   ];
+
+  
+
   environment.gnome.excludePackages = (with pkgs; [
+    # gnome-console
+    # gnome-terminal
     gnome-photos
     gnome-tour
     gedit
     cheese
     gnome-music
-    gnome-console
-    gnome-terminal
     epiphany
     geary
     evince
@@ -147,6 +146,32 @@
     seahorse
   ]);
 
+  environment.variables = {
+    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.libGL}/lib";
+  };
+
+  # fonts = {
+  #   packages = with pkgs; [
+  #     noto-fonts-cjk-sans
+  #     iosevka-bin
+  #     julia-mono
+  #     apple-fonts.sf-pro
+  #   ];
+  #   fontconfig = {
+  #     enable = true;
+  #     localConf = builtins.readFile ../../.config/fontconfig/fonts.conf;
+  #   };
+  # };
+
+  programs.steam.enable = true;
+  programs.zsh.enable = true;
+  programs.ssh.extraConfig = ''
+    Host *
+    ServerlALiveInternal 120
+  '';
+
+
+  nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
 
 }

@@ -22,6 +22,7 @@
       flake-utils.lib.eachDefaultSystem (
         system: let
           pkgs = nixpkgs.legacyPackages.${system};
+
         in 
         {
           devShells.default = import ./shell.nix {inherit pkgs;};
@@ -30,14 +31,19 @@
       )
       // 
       {
+        lib = nixpkgs.lib // home-manager.lib;
+
+        # nixosModules = import ./modules/nixos;
+        homeModules = import ./modules/home;
+
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
           modules = [
-            ./nixos/configuration.nix
+            ./machines/home/configuration.nix
             home-manager.nixosModules.home-manager
-           ];
-           specialArgs = {
+          ];
+          specialArgs = {
             inherit inputs outputs;
-           };
+          };
         };
       };
 }
