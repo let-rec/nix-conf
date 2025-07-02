@@ -79,7 +79,7 @@
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
 
-  services.e-imzo.enable = true;
+  # services.e-imzo.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
   users.users.letrec = {
