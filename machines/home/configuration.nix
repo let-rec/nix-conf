@@ -1,17 +1,30 @@
-{ config, pkgs, inputs, outputs, ... }:
+{ 
+  pkgs, 
+  inputs, 
+  outputs, 
+  ... 
+}:
 
 {
   imports = 
   [
+    # outputs.nixosModules.firefox
+    outputs.nixosModules.sound
+    outputs.nixosModules.ssh
+    outputs.nixosModules.zsh
+    # outputs.nixosModules.vscode
+    outputs.nixosModules.fonts
     ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
   ];
+  nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
-  # boot.kernelParams = [
-  #   "nvidia.NVreg_RegistryDwords=EnableBrightnessControl=1"
-  # ]
+  boot.kernelParams = [
+    "nvidia.NVreg_RegistryDwords=EnableBrightnessControl=1"
+  ];
   boot.supportedFilesystems = [ "ntfs" ];
 
   home-manager = {
@@ -19,7 +32,11 @@
     users.letrec = import ../../home.nix;
   };
   
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    firewall.enable = false;
+  };
 
   time.timeZone = "Etc/GMT-5";
   i18n = {
@@ -55,21 +72,12 @@
     videoDrivers = ["nvidia"];
   };
 
-  services.openssh.enable = true;
   services.pcscd.enable = true;
   services.printing.enable = true;
   services.earlyoom.enable = true;
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
   services.e-imzo.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
@@ -100,8 +108,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   environment.shells = with pkgs; [ zsh ];
   environment.systemPackages = with pkgs; [
     vim
@@ -116,16 +122,15 @@
     fdupes
     libGL
     pulseaudio
-    firefox
     prismlauncher
     telegram-desktop
     keepassxc
     git
-    vscode
     element-desktop
+    firefox
+    vscode
   ];
 
-  
 
   environment.gnome.excludePackages = (with pkgs; [
     # gnome-console
@@ -150,6 +155,8 @@
     LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.libGL}/lib";
   };
 
+
+  ####
   # fonts = {
   #   packages = with pkgs; [
   #     noto-fonts-cjk-sans
@@ -163,14 +170,13 @@
   #   };
   # };
 
+  # programs.ssh.extraConfig = ''
+  #   Host *
+  #   ServerlALiveInternal 120
+  # '';
+  ####
+
   programs.steam.enable = true;
-  programs.zsh.enable = true;
-  programs.ssh.extraConfig = ''
-    Host *
-    ServerlALiveInternal 120
-  '';
-
-
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
 

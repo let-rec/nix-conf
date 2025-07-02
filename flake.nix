@@ -33,7 +33,7 @@
       {
         lib = nixpkgs.lib // home-manager.lib;
 
-        # nixosModules = import ./modules/nixos;
+        nixosModules = import ./modules/nixos;
         homeModules = import ./modules/home;
 
         nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {

@@ -6,18 +6,13 @@
 }:
 {
   imports = [
-    #outputs.homeModules.bash
-    outputs.homeModules.vscode
-    #outputs.homeModules.firefox
-    #outputs.homeModules.direnv
+    outputs.homeModules.bash
     outputs.homeModules.zsh
     outputs.homeModules.git
-    #outputs.homeModules.ssh
-    #outputs.homeModules.zed
-    #outputs.homeModules.nixpkgs
-    #outputs.homeModules.packages
-    outputs.homeModules.fastfetch
+    # outputs.homeModules.ssh
     outputs.homeModules.nixpkgs
+    outputs.homeModules.packages
+    outputs.homeModules.fastfetch
   ];
   home = {
     stateVersion = "24.11";

@@ -1,12 +1,7 @@
-{...}: {
-  config = {
-    services.openssh = {
-      enable = true;
-      settings = {
-        
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
-      };
-    };
-  };
-}
+# {...}: {
+#   config = {
+#     programs.openssh = {
+#       enable = true;
+#     };
+#   };
+# }
