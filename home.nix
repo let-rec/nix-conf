@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    outputs.homeModules.bash
+    outputs.homeModules.starship
     outputs.homeModules.zsh
     outputs.homeModules.git
     # outputs.homeModules.ssh
