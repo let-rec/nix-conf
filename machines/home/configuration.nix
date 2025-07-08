@@ -2,6 +2,7 @@
   pkgs, 
   inputs, 
   outputs, 
+  config,
   ... 
 }:
 
@@ -23,9 +24,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
-  boot.kernelParams = [
-    "nvidia.NVreg_RegistryDwords=EnableBrightnessControl=1"
-  ];
   boot.supportedFilesystems = [ "ntfs" ];
 
   home-manager = {
@@ -65,7 +63,7 @@
     };
     displayManager = {
       gdm.enable = true;
-      gdm.wayland = false;
+      # gdm.wayland = false;
     };
     desktopManager.gnome = {
       enable = true;
@@ -96,11 +94,20 @@
   hardware.graphics = {
     enable = true;
   };
+
   hardware.nvidia = {
     open = false;
     modesetting.enable = true;
-    nvidiaSettings = false;
-    powerManagement.enable = true;
+    nvidiaSettings = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    prime = {
+      # offload.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
   hardware.bluetooth.settings = {
@@ -121,7 +128,7 @@
     zip
     unzip
     fdupes
-    libGL
+   # libGL
     pulseaudio
     prismlauncher
     telegram-desktop
@@ -152,9 +159,9 @@
     seahorse
   ]);
 
-  environment.variables = {
-    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.libGL}/lib";
-  };
+  #environment.variables = {
+  #  LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.libGL}/lib";
+  #};
 
 
   ####
@@ -177,7 +184,7 @@
   # '';
   ####
 
-  programs.steam.enable = true;
+  #programs.steam.enable = true;
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
 
