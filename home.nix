@@ -13,6 +13,8 @@
     outputs.homeModules.nixpkgs
     outputs.homeModules.packages
     outputs.homeModules.fastfetch
+    outputs.homeModules.vscode
+    # outputs.homeModules.firefox
   ];
   home = {
     stateVersion = "24.11";

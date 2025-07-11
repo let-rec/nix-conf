@@ -3,7 +3,9 @@
   fastfetch = import ./fastfetch;
   git = import ./git;
   zsh = import ./zsh;
+  vscode = import ./vscode;
   starship = import ./starship;
+  # firefox = import ./firefox;
   # ssh = import ./ssh;
   nixpkgs = import ./nixpkgs;
   packages = import ./packages;

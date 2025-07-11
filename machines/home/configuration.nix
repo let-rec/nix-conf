@@ -13,7 +13,6 @@
     outputs.nixosModules.sound
     outputs.nixosModules.ssh
     outputs.nixosModules.zsh
-    outputs.nixosModules.vscode
     outputs.nixosModules.fonts
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
@@ -137,6 +136,7 @@
     element-desktop
     firefox
     vscode
+    gnome-builder
   ];
 
 

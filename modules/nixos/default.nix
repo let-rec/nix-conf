@@ -2,10 +2,9 @@
   # List your module files here
   ssh = import ./ssh;
   zsh = import ./zsh;
-  vscode = import ./vscode;
   sound = import ./sound;
   fonts = import ./fonts;
-  # firefox = import ./firefox;
+  #firefox = import ./firefox;
   #boot = import ./boot;
   #game = import ./game;
   #vpn = import ./vpn;

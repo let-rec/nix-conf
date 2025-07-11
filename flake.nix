@@ -8,6 +8,7 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils"; 
+    nur.url = "github:nix-community/NUR";
     
   };
   outputs = {
