@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     outputs.homeModules.starship
     outputs.homeModules.zsh
@@ -24,5 +23,4 @@
   };
 
   programs.home-manager.enable = true;
-
 }

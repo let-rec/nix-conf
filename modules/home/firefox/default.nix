@@ -1,5 +1,4 @@
-{pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -35,7 +34,7 @@
         "signon.firefoxRelay.feature" = "disabled";
         "signon.generation.enabled" = false;
         "signon.management.page.breach-alerts.enabled" = false;
-        "signon.rememberSignons" = false; 
+        "signon.rememberSignons" = false;
       };
     };
   };

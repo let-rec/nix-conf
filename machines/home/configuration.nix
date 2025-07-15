@@ -1,14 +1,11 @@
-{ 
-  pkgs, 
-  inputs, 
-  outputs, 
-  config,
-  ... 
-}:
-
 {
-  imports = 
-  [
+  pkgs,
+  inputs,
+  outputs,
+  config,
+  ...
+}: {
+  imports = [
     # outputs.nixosModules.firefox
     outputs.nixosModules.sound
     outputs.nixosModules.ssh
@@ -19,17 +16,16 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
-  
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = ["ntfs"];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
     users.letrec = import ../../home.nix;
   };
-  
+
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
@@ -81,7 +77,7 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.letrec = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   programs.gnupg.agent = {
@@ -89,7 +85,7 @@
     enableSSHSupport = true;
     pinentryPackage = pkgs.pinentry-curses;
   };
-  
+
   hardware.graphics = {
     enable = true;
   };
@@ -111,11 +107,11 @@
 
   hardware.bluetooth.settings = {
     General = {
-      Experimental = true;   
+      Experimental = true;
     };
   };
 
-  environment.shells = with pkgs; [ zsh ];
+  environment.shells = with pkgs; [zsh];
   environment.systemPackages = with pkgs; [
     vim
     wget
@@ -127,7 +123,7 @@
     zip
     unzip
     fdupes
-   # libGL
+    # libGL
     pulseaudio
     prismlauncher
     telegram-desktop
@@ -139,8 +135,7 @@
     gnome-builder
   ];
 
-
-  environment.gnome.excludePackages = (with pkgs; [
+  environment.gnome.excludePackages = with pkgs; [
     # gnome-console
     # gnome-terminal
     gnome-photos
@@ -157,12 +152,11 @@
     hitori
     atomix
     seahorse
-  ]);
+  ];
 
   #environment.variables = {
   #  LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.libGL}/lib";
   #};
-
 
   ####
   # fonts = {
@@ -187,5 +181,4 @@
   #programs.steam.enable = true;
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
-
 }

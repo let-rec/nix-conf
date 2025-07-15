@@ -70,7 +70,7 @@ in {
       };
       users = {
         # Import your home-manager configuration
-        letrec = import ../../../home.nix;
+        letrec = import ../../home.nix;
       };
     };
   };
