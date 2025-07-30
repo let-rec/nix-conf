@@ -16,9 +16,6 @@
         pkief.material-product-icons
       ];
       userSettings = {
-        "[rust]" = {
-          "editor.defaultFormatter" = "rust-lang.rust-analyzer";
-        };
         "github.copilot.enable" = {
           "*" = false;
           "plaintext" = false;

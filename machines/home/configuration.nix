@@ -32,6 +32,8 @@
     firewall.enable = false;
   };
 
+  virtualisation.docker.enable = true;
+
   time.timeZone = "Etc/GMT-5";
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -58,12 +60,12 @@
     };
     displayManager = {
       gdm.enable = true;
-      # gdm.wayland = false;
+      gdm.wayland = false;
     };
     desktopManager.gnome = {
       enable = true;
     };
-    videoDrivers = ["nvidia"];
+    videoDrivers = ["modesetting" "nvidia"];
   };
 
   services.pcscd.enable = true;
@@ -90,18 +92,26 @@
     enable = true;
   };
 
-  hardware.nvidia = {
-    open = false;
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    prime = {
-      # offload.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+    nvidia = {
+      open = false;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      
+      prime = {
+        sync.enable = true;
+        offload.enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
   };
 
@@ -133,6 +143,8 @@
     firefox
     vscode
     gnome-builder
+    zed-editor
+    fractal
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -178,7 +190,7 @@
   # '';
   ####
 
-  #programs.steam.enable = true;
+  programs.steam.enable = true;
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
 }
