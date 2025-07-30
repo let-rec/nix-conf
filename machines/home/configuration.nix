@@ -108,7 +108,7 @@
       
       prime = {
         sync.enable = true;
-        offload.enable = true;
+        offload.enable = false;
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
