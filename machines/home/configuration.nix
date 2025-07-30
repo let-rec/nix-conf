@@ -141,6 +141,7 @@
     gnome-builder
     zed-editor
     fractal
+    protonup
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -187,6 +188,13 @@
   ####
 
   programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
+  environment.sessionVariables = {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
+      "/home/user/.steam/root/compatibilitytools.d";
+  };
+
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
 }
