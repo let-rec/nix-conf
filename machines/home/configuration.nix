@@ -20,6 +20,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
+  # boot.kernelModules = [ "i915" ];
 
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
@@ -65,7 +66,7 @@
     desktopManager.gnome = {
       enable = true;
     };
-    videoDrivers = ["modesetting" "nvidia"];
+    videoDrivers = ["modesetting"];
   };
 
   services.pcscd.enable = true;
@@ -93,23 +94,23 @@
     enable32Bit = true;
   };
 
-  hardware = {
-    nvidia = {
-      open = false;
-      modesetting.enable = true;
-      nvidiaSettings = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # hardware = {
+  #   nvidia = {
+  #     open = false;
+  #     modesetting.enable = true;
+  #     nvidiaSettings = true;
+  #     powerManagement.enable = false;
+  #     powerManagement.finegrained = false;
+  #     package = config.boot.kernelPackages.nvidiaPackages.stable;
       
-      prime = {
-        sync.enable = true;
-        offload.enable = false;
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    };
-  };
+  #     prime = {
+  #       sync.enable = true;
+  #       offload.enable = false;
+  #       intelBusId = "PCI:0:2:0";
+  #       nvidiaBusId = "PCI:1:0:0";
+  #     };
+  #   };
+  # };
 
   hardware.bluetooth.settings = {
     General = {
