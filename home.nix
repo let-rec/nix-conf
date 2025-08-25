@@ -20,13 +20,13 @@
     username = "letrec";
     homeDirectory = "/home/letrec";
     enableNixpkgsReleaseCheck = false;
-    packages = with pkgs; [
-      protonup
-    ];
-    sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
-      "\${HOME}/.steam/root/compatibilitytools.d";
-  };
+  #   packages = with pkgs; [
+  #     protonup
+  #   ];
+  #   sessionVariables = {
+  #   STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
+  #     "\${HOME}/.steam/root/compatibilitytools.d";
+  # };
   };
 
   programs.home-manager.enable = true;

@@ -28,7 +28,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "let_rec";
     networkmanager.enable = true;
     firewall.enable = false;
   };
@@ -66,7 +66,7 @@
     desktopManager.gnome = {
       enable = true;
     };
-    videoDrivers = ["modesetting"];
+    videoDrivers = ["nvidia"];
   };
 
   services.pcscd.enable = true;
@@ -74,8 +74,6 @@
   services.earlyoom.enable = true;
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
-
-  # services.e-imzo.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
   users.users.letrec = {
@@ -94,24 +92,12 @@
     enable32Bit = true;
   };
 
-  # hardware = {
-  #   nvidia = {
-  #     open = false;
-  #     modesetting.enable = true;
-  #     nvidiaSettings = true;
-  #     powerManagement.enable = false;
-  #     powerManagement.finegrained = false;
-  #     package = config.boot.kernelPackages.nvidiaPackages.stable;
-      
-  #     prime = {
-  #       sync.enable = true;
-  #       offload.enable = false;
-  #       intelBusId = "PCI:0:2:0";
-  #       nvidiaBusId = "PCI:1:0:0";
-  #     };
-  #   };
+  # prime = {
+  #   sync.enable = true;
+  #   offload.enable = false;
+  #   intelBusId = "PCI:0:2:0";
+  #   nvidiaBusId = "PCI:1:0:0";
   # };
-
   hardware.bluetooth.settings = {
     General = {
       Experimental = true;
@@ -142,7 +128,6 @@
     gnome-builder
     zed-editor
     fractal
-    protonup
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -191,10 +176,10 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
-  environment.sessionVariables = {
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
-      "/home/user/.steam/root/compatibilitytools.d";
-  };
+  # environment.sessionVariables = {
+  #   STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
+  #     "/home/user/.steam/root/compatibilitytools.d";
+  # };
 
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
