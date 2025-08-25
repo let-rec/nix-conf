@@ -38,20 +38,20 @@
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
-  hardware = {
-    # CPU (Intel)
-    # cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # hardware = {
+  #   # CPU (Intel)
+  #   # cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-    # GPU (Nvidia)
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = true;
-      powerManagement.finegrained = false;
-      open = false;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
-  };
+  #   # GPU (Nvidia)
+  #   nvidia = {
+  #     modesetting.enable = true;
+  #     powerManagement.enable = true;
+  #     powerManagement.finegrained = false;
+  #     open = false;
+  #     nvidiaSettings = true;
+  #     package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   };
+  # };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

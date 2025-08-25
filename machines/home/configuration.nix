@@ -92,12 +92,24 @@
     enable32Bit = true;
   };
 
-  # prime = {
-  #   sync.enable = true;
-  #   offload.enable = false;
-  #   intelBusId = "PCI:0:2:0";
-  #   nvidiaBusId = "PCI:1:0:0";
-  # };
+  hardware = {
+    nvidia = {
+      open = false;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      prime = {
+        sync.enable = true;
+        offload.enable = false;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    };
+  };
+  
+  
   hardware.bluetooth.settings = {
     General = {
       Experimental = true;
