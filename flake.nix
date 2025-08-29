@@ -33,7 +33,7 @@
       nixosModules = import ./modules/nixos;
       homeModules = import ./modules/home;
 
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.let-rec = nixpkgs.lib.nixosSystem {
         modules = [
           ./machines/home/configuration.nix
           home-manager.nixosModules.home-manager
