@@ -20,9 +20,9 @@
     username = "letrec";
     homeDirectory = "/home/letrec";
     enableNixpkgsReleaseCheck = false;
-  #   packages = with pkgs; [
-  #     protonup
-  #   ];
+    packages = with pkgs; [
+      anki
+    ];
   #   sessionVariables = {
   #   STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
   #     "\${HOME}/.steam/root/compatibilitytools.d";
