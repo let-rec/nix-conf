@@ -28,7 +28,7 @@
   };
 
   networking = {
-    hostName = "rec";
+    hostName = "let-rec";
     networkmanager.enable = true;
     firewall.enable = false;
   };
