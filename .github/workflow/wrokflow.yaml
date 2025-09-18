@@ -1,0 +1,18 @@
+on:
+  pull_request:
+  push:
+    branches: [main, x86_64-linux]
+
+jobs:
+  tests:
+    name: flake check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Test flake check     
+        run: nix flake check --show-trace

@@ -140,6 +140,8 @@
     gnome-builder
     zed-editor
     fractal
+    poedit
+    github-desktop
   ];
 
   environment.gnome.excludePackages = with pkgs; [
