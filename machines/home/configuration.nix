@@ -20,7 +20,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
-  # boot.kernelModules = [ "i915" ];
 
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
@@ -38,18 +37,6 @@
   time.timeZone = "Etc/GMT-5";
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    ### JAPANESE
-    # inputMethod = {
-    #   enable = true;
-    #   type = true;
-    #   ibus.engines = with pkgs.ibus.engines; [
-    #     mozc
-    #   ];
-    # };
-    # extraLocationSettings = {
-    #   LANGUAGE = "ja_JP";
-    #   LC_ALL = "ja_JP.UTF-8";
-    # };
   };
 
   services.xserver = {
@@ -74,6 +61,7 @@
   services.earlyoom.enable = true;
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
+  services.flatpak.enable = true;
 
   users.defaultUserShell = pkgs.zsh;
   users.users.letrec = {
@@ -108,8 +96,7 @@
       };
     };
   };
-  
-  
+
   hardware.bluetooth.settings = {
     General = {
       Experimental = true;
@@ -142,6 +129,7 @@
     fractal
     poedit
     github-desktop
+    pinentry
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -163,37 +151,9 @@
     seahorse
   ];
 
-  #environment.variables = {
-  #  LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.libGL}/lib";
-  #};
-
-  ####
-  # fonts = {
-  #   packages = with pkgs; [
-  #     noto-fonts-cjk-sans
-  #     iosevka-bin
-  #     julia-mono
-  #     apple-fonts.sf-pro
-  #   ];
-  #   fontconfig = {
-  #     enable = true;
-  #     localConf = builtins.readFile ../../.config/fontconfig/fonts.conf;
-  #   };
-  # };
-
-  # programs.ssh.extraConfig = ''
-  #   Host *
-  #   ServerlALiveInternal 120
-  # '';
-  ####
-
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
-  # environment.sessionVariables = {
-  #   STEAM_EXTRA_COMPAT_TOOLS_PATHS = 
-  #     "/home/user/.steam/root/compatibilitytools.d";
-  # };
 
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
