@@ -133,7 +133,7 @@
 
   environment.gnome.excludePackages = with pkgs; [
     # gnome-console
-    # gnome-terminal
+    # gnome-terminal...
     gnome-photos
     gnome-tour
     gedit
