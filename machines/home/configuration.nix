@@ -115,7 +115,6 @@
     zip
     unzip
     fdupes
-    # libGL
     pulseaudio
     prismlauncher
     telegram-desktop
