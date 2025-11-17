@@ -2,20 +2,25 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    difftastic.enable = true;
-
-    userName = "let-rec";
-    userEmail = "toxtayevhamidulloh6997@gmail.com";
-
+    
     signing = {
       signByDefault = true;
       key = "06F6FCE379C490BAC47F4ACEE9180B76B6DB2E66";
     };
 
-    extraConfig = {
+    settings = {
+      user = {
+        name = "let-rec";
+        email = "toxtayevhamidulloh6997@gmail.com";
+      };
       init.defaultBranch = "main";
       http.sslVerify = false;
       pull.rebase = false;
     };
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
   };
 }

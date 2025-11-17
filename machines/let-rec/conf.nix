@@ -15,6 +15,13 @@
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
 
+  nixpkgs.overlays = [
+    (self: super: {
+      python3 = super.python312;
+      python3Packages = super.python312Packages;
+    })
+  ];
+
   networking = {
     hostName = hostname;
     networkmanager.enable = true;
@@ -53,7 +60,7 @@
   services.earlyoom.enable = true;
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
-  # services.flatpak.enable = true;
+  services.flatpak.enable = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -72,6 +79,7 @@
 
   virtualisation.docker.enable = true;
 
+  programs.zsh.enable = true;
   services.openssh = {
     enable = true;
     settings = {
@@ -97,7 +105,6 @@
     modesetting.enable = true;
     nvidiaSettings = false;
     powerManagement.enable = true;
-    powerManagement.finegrained = true;
   };
 
   hardware.bluetooth.settings = {

@@ -13,7 +13,7 @@ in {
     fastfetch
     bash
     direnv
-    firefox
+    # firefox
   ];
 
   home.stateVersion = "24.11";
@@ -91,31 +91,31 @@ in {
     # nfs-utils
     # gnomeExtensions.appindicator
     # CLI
-    difftastic
-    htop
-    jq
-    ripgrep
-    rlwrap
-    spek
-    tokei
+    # difftastic
+    # htop
+    # jq
+    # ripgrep
+    # rlwrap
+    # spek
+    # tokei
     tree
-    just
+    # just
     # Documents
-    mdbook
-    mdbook-toc
+    # mdbook
+    # mdbook-toc
     # anki
     # obsidian
     # poppler_utils
     # newsboat
     # Media
-    ffmpeg-full
-    yt-dlp
-    optipng
+    # ffmpeg-full
+    # yt-dlp
+    # optipng
     # Agda
-    (agda.withPackages (ps:
-      with ps; [
-        standard-library
-      ]))
+    # (agda.withPackages (ps:
+    #   with ps; [
+    #     standard-library
+    #   ]))
     # Nix
     nil
     nixd
