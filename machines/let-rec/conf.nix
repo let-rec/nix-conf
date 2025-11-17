@@ -1,42 +1,34 @@
 {
   pkgs,
-  inputs,
-  outputs,
-  config,
+  hostname,
+  username,
   ...
 }: {
   imports = [
-    # outputs.nixosModules.firefox
-    outputs.nixosModules.sound
-    outputs.nixosModules.ssh
-    outputs.nixosModules.zsh
-    outputs.nixosModules.fonts
-    ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.home-manager
+    # inputs.home-manager.nixosModules.home-manager
+    ./hardware.nix
   ];
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs outputs;};
-    users.letrec = import ../../home.nix;
-  };
-
   networking = {
-    hostName = "let-rec";
+    hostName = hostname;
     networkmanager.enable = true;
-    firewall.enable = false;
   };
-
-  virtualisation.docker.enable = true;
-
   time.timeZone = "Etc/GMT-5";
   i18n = {
     defaultLocale = "en_US.UTF-8";
+
+    # extraLocales = [
+    #   "ru_RU.UTF-8/UTF-8"
+    #   "en_US.UTF-8/UTF-8"
+    #   "uz_UZ.UTF-8/UTF-8"
+    #   "all"
+    # ];
   };
 
   services.xserver = {
@@ -61,14 +53,34 @@
   services.earlyoom.enable = true;
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
-  users.defaultUserShell = pkgs.zsh;
-  users.users.letrec = {
-    isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel"];
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
 
+  users.defaultUserShell = pkgs.zsh;
+  users.users.${username} = {
+    isNormalUser = true;
+    extraGroups = ["networkmanager" "wheel" "docker"];
+  };
+
+  virtualisation.docker.enable = true;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      # Forbid root login through SSH.
+      PermitRootLogin = "no";
+      # Use keys only. Remove if you want to SSH using password (not recommended)
+      PasswordAuthentication = true;
+    };
+  };
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -77,24 +89,15 @@
 
   hardware.graphics = {
     enable = true;
-    enable32Bit = true;
+    # enable32Bit = true;
   };
 
-  hardware = {
-    nvidia = {
-      open = false;
-      modesetting.enable = true;
-      nvidiaSettings = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-      prime = {
-        sync.enable = true;
-        offload.enable = false;
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    };
+  hardware.nvidia = {
+    open = false;
+    modesetting.enable = true;
+    nvidiaSettings = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
   };
 
   hardware.bluetooth.settings = {
@@ -105,6 +108,7 @@
 
   environment.shells = with pkgs; [zsh];
   environment.systemPackages = with pkgs; [
+    docker-compose
     vim
     wget
     file
@@ -116,13 +120,11 @@
     unzip
     fdupes
     pulseaudio
-    prismlauncher
     telegram-desktop
     keepassxc
-    git
-    element-desktop
-    firefox
-    vscode
+    # git
+    # firefox
+    # vscode
     gnome-builder
     zed-editor
     fractal
@@ -150,10 +152,5 @@
     seahorse
   ];
 
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
-  programs.gamemode.enable = true;
-
-  nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";
 }
