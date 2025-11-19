@@ -31,6 +31,8 @@ in {
     };
   };
 
+  programs.starship.enable = false;
+
   # "org/gnome/desktop/peripherals/touchpad" = {
   #   tap-to-click = true;
   #   two-finger-scrolling-enabled = true;

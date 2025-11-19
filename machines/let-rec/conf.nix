@@ -2,6 +2,7 @@
   pkgs,
   hostname,
   username,
+  config,
   ...
 }: {
   imports = [
@@ -14,7 +15,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
-
+  
+  # ACPI tweaks
+  boot.kernelParams = [
+    "acpi_osi="
+    "acpi_osi=Linux"
+  ];
+  programs.starship.enable = false;
   nixpkgs.overlays = [
     (self: super: {
       python3 = super.python312;
@@ -71,6 +78,7 @@
     pulse.enable = true;
   };
 
+  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
   users.users.${username} = {
     isNormalUser = true;
@@ -79,7 +87,6 @@
 
   virtualisation.docker.enable = true;
 
-  programs.zsh.enable = true;
   services.openssh = {
     enable = true;
     settings = {
@@ -97,14 +104,22 @@
 
   hardware.graphics = {
     enable = true;
-    # enable32Bit = true;
+    enable32Bit = true;
   };
 
   hardware.nvidia = {
     open = false;
     modesetting.enable = true;
-    nvidiaSettings = false;
+    nvidiaSettings = true;
     powerManagement.enable = true;
+    powerManagement.finegrained = false;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    prime = {
+      sync.enable = true;
+      offload.enable = false;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
   hardware.bluetooth.settings = {
@@ -130,7 +145,7 @@
     telegram-desktop
     keepassxc
     # git
-    # firefox
+    firefox
     # vscode
     gnome-builder
     zed-editor
