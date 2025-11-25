@@ -6,16 +6,15 @@
   ...
 }: {
   imports = [
-    # inputs.home-manager.nixosModules.home-manager
     ./hardware.nix
+    ./modules.nix
   ];
-  # nixpkgs.config.allowUnfree = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
-  
+
   # ACPI tweaks
   boot.kernelParams = [
     "acpi_osi="
@@ -144,9 +143,7 @@
     pulseaudio
     telegram-desktop
     keepassxc
-    # git
     firefox
-    # vscode
     gnome-builder
     zed-editor
     fractal

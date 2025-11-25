@@ -19,15 +19,17 @@
   outputs = {
     self,
     nixpkgs,
-    nix-darwin,
-    nix-homebrew,
     home-manager,
     flake-parts,
+    # nix-darwin,
+    # nix-homebrew,
     # apple-fonts,
     nur,
     k,
     ...
-  } @ inputs: let
+  } @ inputs:
+
+  let
     mkPkgs = system:
       import nixpkgs {
         localSystem = {inherit system;};
@@ -75,42 +77,42 @@
           )
           ++ modules;
       };
-    # mkDarwin = {
-    #   system,
-    #   hostname,
-    #   username,
-    #   conf,
-    #   home,
-    #   modules ? [],
-    #   configurationRevision,
-    # }: let
-    #   pkgs = mkPkgs system;
-    # in
-    #   nix-darwin.lib.darwinSystem {
-    #     inherit pkgs;
-    #     specialArgs = {inherit inputs system hostname username configurationRevision;};
-    #     modules =
-    #       [
-    #         ./modules/core/nix.nix
-    #         conf
-    #         home-manager.darwinModules.home-manager
-    #         {
-    #           home-manager.useGlobalPkgs = true;
-    #           home-manager.useUserPackages = true;
-    #           home-manager.users.${username} = import home;
-    #         }
-    #         nix-homebrew.darwinModules.nix-homebrew
-    #         {
-    #           nix-homebrew = {
-    #             enable = true;
-    #             enableRosetta = true;
-    #             user = username;
-    #             autoMigrate = true;
-    #           };
-    #         }
-    #       ]
-    #       ++ modules;
-    #   };
+   /* mkDarwin = {
+      system,
+      hostname,
+      username,
+      conf,
+      home,
+      modules ? [],
+      configurationRevision,
+    }: let
+      pkgs = mkPkgs system;
+    in
+      nix-darwin.lib.darwinSystem {
+        inherit pkgs;
+        specialArgs = {inherit inputs system hostname username configurationRevision;};
+        modules =
+          [
+            ./modules/core/nix.nix
+            conf
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import home;
+            }
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = username;
+                autoMigrate = true;
+              };
+            }
+          ]
+          ++ modules;
+      };*/
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
