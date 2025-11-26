@@ -9,6 +9,16 @@
 
     flake-utils.url = "github:numtide/flake-utils";
     nur.url = "github:nix-community/NUR";
+
+    nix-data = {
+      url = "github:xinux-org/nix-data";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    xinux-modules = {
+      url = "github:xinux-org/modules";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -30,12 +40,26 @@
     // {
       lib = nixpkgs.lib // home-manager.lib;
 
+      systems.modules.nixos = with inputs; [
+        nix-data.nixosModules.nix-data
+        xinux-modules.nixosModules.efiboot
+        xinux-modules.nixosModules.gnome
+        xinux-modules.nixosModules.kernel
+        xinux-modules.nixosModules.networking
+        xinux-modules.nixosModules.packagemanagers
+        xinux-modules.nixosModules.pipewire
+        xinux-modules.nixosModules.printing
+        xinux-modules.nixosModules.xinux
+        xinux-modules.nixosModules.metadata
+      ];
+
       nixosModules = import ./modules/nixos;
       homeModules = import ./modules/home;
 
       nixosConfigurations.let-rec = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         modules = [
-          ./machines/home/configuration.nix
+          ./machines/home/default.nix
           home-manager.nixosModules.home-manager
         ];
         specialArgs = {

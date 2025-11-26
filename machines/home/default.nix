@@ -13,6 +13,8 @@
     outputs.nixosModules.fonts
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
+    ./modules.nix
+    inputs.nix-data.nixosModules.nix-data
   ];
   nixpkgs.config.allowUnfree = true;
 
@@ -153,6 +155,13 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+
+  programs.nix-data = {
+    enable = true;
+    systemconfig = "/home/letrec/nix-conf/machines/home/default.nix";
+    flake = "/home/letrec/nix-conf/flake.nix";
+    flakearg = "let-rec";
+  };
 
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";

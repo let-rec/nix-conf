@@ -16,35 +16,51 @@
         pkief.material-product-icons
       ];
       userSettings = {
-        "github.copilot.enable" = {
-          "*" = false;
-          "plaintext" = false;
-          "markdown" = false;
-          "scminput" = false;
+        "files.autoSave" = "off";
+        "files.trimTrailingWhitespace"= true;
+        "files.insertFinalNewline"=true;
+        "editor.fontFamily"= "Iosevka, monospace";
+        "editor.wordWrap"= "on";
+        "editor.fontSize"= 17;
+        "editor.lineHeight"= 1.5;
+        "editor.wordWrapColumn"= 60;
+        "diffEditor.wordWrap"= "on";
+        "liveServer.settings.donotShowInfoMsg"= true;
+        "explorer.confirmDelete"= false;
+        "terminal.integrated.tabs.enabled"=true;
+        "window.menuBarVisibility"= "compact";
+        "editor.minimap.enabled"= false;
+        "editor.tabSize"= 2;
+        "haskell.manageHLS"= "GHCup";
+        "workbench.colorTheme"= "Gruvbox Dark Hard";
+        "workbench.productIconTheme"= "material-product-icons";
+
+        "diffEditor.ignoreTrimWhitespace"= false;
+        "extensions.autoCheckUpdates"= false;
+        "terminal.integrated.defaultProfile.osx"= "zsh";
+        "update.mode"= "none";
+        "vsicons.dontShowNewVersionMessage"= true;
+        "github.copilot.enable"= {
+          "*"= false;
+          "markdown"=false;
+          "plaintext"= false;
+          "scminput"= false;
         };
-        "terminal.integrated.defaultProfile.osx" = "zsh";
-        "workbench.iconTheme" = "vscode-icons";
-        "diffEditor.ignoreTrimWhitespace" = false;
-        "vsicons.dontShowNewVersionMessage" = true;
-        "liveServer.settings.donotShowInfoMsg" = true;
-        "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nixd";
-        "nix.serverSettings" = {
-          "nixd" = {
-            "formatting" = {
-              "command" = [
+        "nix.enableLanguageServer"= true;
+        "nix.serverPath"= "nixd";
+        "nix.serverSettings"= {
+          "nixd"= {
+            "formatting"= {
+              "command"= [
                 "nixfmt"
               ];
             };
-            "options" = {
-              "nixos" = {
-                "expr" = "(builtins.getFlake \"/absolute/path/to/flake\").nixosConfigurations.<name>.options";
+            "options"= {
+              "home-manager"= {
+                "expr"= "(builtins.getFlake \"/absolute/path/to/flake\").homeConfigurations.<name>.options";
               };
-              "home-manager" = {
-                "expr" = "(builtins.getFlake \"/absolute/path/to/flake\").homeConfigurations.<name>.options";
-              };
-              "nix-darwin" = {
-                "expr" = "(builtins.getFlake \"$\{workspaceFolder}/path/to/flake\").darwinConfigurations.<name>.options";
+              "nixos"= {
+                "expr"= "(builtins.getFlake \"/absolute/path/to/flake\").nixosConfigurations.<name>.options";
               };
             };
           };
