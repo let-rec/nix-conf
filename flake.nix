@@ -59,7 +59,7 @@
       nixosConfigurations.let-rec = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./machines/home/default.nix
+          ./machines/home/configuration.nix
           home-manager.nixosModules.home-manager
         ];
         specialArgs = {

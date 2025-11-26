@@ -158,7 +158,7 @@
 
   programs.nix-data = {
     enable = true;
-    systemconfig = "/home/letrec/nix-conf/machines/home/default.nix";
+    systemconfig = "/home/letrec/nix-conf/machines/home/configuration.nix";
     flake = "/home/letrec/nix-conf/flake.nix";
     flakearg = "let-rec";
   };

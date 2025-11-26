@@ -662,11 +662,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1763835633,
-        "narHash": "sha256-HzxeGVID5MChuCPESuC0dlQL1/scDKu+MmzoVBJxulM=",
+        "lastModified": 1763966396,
+        "narHash": "sha256-6eeL1YPcY1MV3DDStIDIdy/zZCDKgHdkCmsrLJFiZf0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "050e09e091117c3d7328c7b2b7b577492c43c134",
+        "rev": "5ae3b07d8d6527c42f17c876e404993199144b6a",
         "type": "github"
       },
       "original": {
@@ -682,11 +682,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1764073046,
-        "narHash": "sha256-9rpTKauKTmDra2T93YAOT41k0PQMDcCunQdHxefl9J4=",
+        "lastModified": 1764150297,
+        "narHash": "sha256-zAeAck3otJK54excuVslYM0sDPH47CXkrPIhB/Gp3ZA=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "7097c98fa0d0dedd92902ab1bb4de0c2c8d666e4",
+        "rev": "01ba49a42197e980694c5c52495fd3b58cd69fa1",
         "type": "github"
       },
       "original": {
@@ -1114,11 +1114,11 @@
         "xinux-module-manager": "xinux-module-manager"
       },
       "locked": {
-        "lastModified": 1764074119,
-        "narHash": "sha256-3cEL4F12/akWSZCDx9kss5b9ch+ElfggeviI7wzFaCY=",
+        "lastModified": 1764153170,
+        "narHash": "sha256-uWJzpIVsNxQHq27OchFqjxSNe//ZlAbIcr/wMtBn8/E=",
         "owner": "xinux-org",
         "repo": "modules",
-        "rev": "80247a4b3e56401356c997da1a80295d7078c1a5",
+        "rev": "3575fae1f76ec809c8606641f15dde34d40840ed",
         "type": "github"
       },
       "original": {
