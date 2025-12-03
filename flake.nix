@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -10,6 +10,7 @@
     flake-utils.url = "github:numtide/flake-utils";
     nur.url = "github:nix-community/NUR";
 
+    # Needed for Xinux
     nix-data = {
       url = "github:xinux-org/nix-data";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +41,7 @@
     // {
       lib = nixpkgs.lib // home-manager.lib;
 
+      # This systems for xinux-module-manager
       systems.modules.nixos = with inputs; [
         nix-data.nixosModules.nix-data
         xinux-modules.nixosModules.efiboot

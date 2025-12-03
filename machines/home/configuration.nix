@@ -11,6 +11,7 @@
     outputs.nixosModules.ssh
     outputs.nixosModules.zsh
     outputs.nixosModules.fonts
+    # outputs.nixosModules.postgresql
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
     ./modules.nix
@@ -41,21 +42,23 @@
     defaultLocale = "en_US.UTF-8";
   };
 
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us,ru";
-      options = "caps:escape,grp:alt_shift_toggle";
-      variant = "altgr-intl,,";
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us,ru";
+        options = "caps:escape,grp:alt_shift_toggle";
+        variant = "altgr-intl,,";
+      };
+      videoDrivers = ["nvidia"];
     };
     displayManager = {
       gdm.enable = true;
-      gdm.wayland = false;
+      gdm.wayland = true;
     };
     desktopManager.gnome = {
       enable = true;
     };
-    videoDrivers = ["nvidia"];
   };
 
   services.pcscd.enable = true;
@@ -130,7 +133,7 @@
     fractal
     poedit
     github-desktop
-    pinentry
+    pinentry-curses
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -152,16 +155,16 @@
     seahorse
   ];
 
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
-  programs.gamemode.enable = true;
+  # programs.steam.enable = true;
+  # programs.steam.gamescopeSession.enable = true;
+  # programs.gamemode.enable = true;
 
-  programs.nix-data = {
-    enable = true;
-    systemconfig = "/home/letrec/nix-conf/machines/home/configuration.nix";
-    flake = "/home/letrec/nix-conf/flake.nix";
-    flakearg = "let-rec";
-  };
+  # programs.nix-data = {
+  #   enable = true;
+  #   systemconfig = "/home/letrec/nix-conf/machines/home/configuration.nix";
+  #   flake = "/home/letrec/nix-conf/flake.nix";
+  #   flakearg = "let-rec";
+  # };
 
   nix.settings.experimental-features = ["nix-command flakes"];
   system.stateVersion = "25.05";

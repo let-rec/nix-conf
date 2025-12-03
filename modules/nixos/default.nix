@@ -4,6 +4,7 @@
   zsh = import ./zsh;
   sound = import ./sound;
   fonts = import ./fonts;
+  postgresql = import ./postgresql;
   #firefox = import ./firefox;
   #boot = import ./boot;
   #game = import ./game;
