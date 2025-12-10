@@ -13,7 +13,7 @@
     outputs.nixosModules.fonts
     # outputs.nixosModules.postgresql
     ./hardware-configuration.nix
-    inputs.home-manager.nixosModules.home-manager
+    # inputs.home-manager.nixosModules.home-manager
     ./modules.nix
     inputs.nix-data.nixosModules.nix-data
   ];
@@ -24,10 +24,10 @@
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs outputs;};
-    users.letrec = import ../../home.nix;
-  };
+  # home-manager = {
+  #   extraSpecialArgs = {inherit inputs outputs;};
+  #   users.letrec = import ../../home.nix;
+  # };
 
   networking = {
     hostName = "let-rec";
@@ -54,7 +54,7 @@
     };
     displayManager = {
       gdm.enable = true;
-      gdm.wayland = true;
+      gdm.wayland = false;
     };
     desktopManager.gnome = {
       enable = true;
@@ -67,6 +67,14 @@
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
   services.flatpak.enable = true;
+  services.dbus = {
+    enable = true;
+    implementation = "broker";
+    packages = with pkgs; [
+      xfce.xfconf
+      gnome2.GConf
+    ];
+  };
 
   users.defaultUserShell = pkgs.zsh;
   users.users.letrec = {
