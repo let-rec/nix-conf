@@ -63,15 +63,15 @@ in {
       };
     };
 
-    # home-manager = {
-    #   # backupFileExtension = "baka";
-    #   extraSpecialArgs = {
-    #     inherit inputs outputs;
-    #   };
-    #   users = {
-    #     # Import your home-manager configuration
-    #     letrec = import ../../home.nix;
-    #   };
-    # };
+    home-manager = {
+      backupFileExtension = "bak";
+      extraSpecialArgs = {
+        inherit inputs outputs;
+      };
+      users = {
+        # Import your home-manager configuration
+        letrec = import ../../home.nix;
+      };
+    };
   };
 }

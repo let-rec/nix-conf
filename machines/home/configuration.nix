@@ -13,7 +13,7 @@
     outputs.nixosModules.fonts
     # outputs.nixosModules.postgresql
     ./hardware-configuration.nix
-    # inputs.home-manager.nixosModules.home-manager
+    inputs.home-manager.nixosModules.home-manager
     ./modules.nix
     inputs.nix-data.nixosModules.nix-data
   ];
@@ -23,11 +23,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
-
-  # home-manager = {
-  #   extraSpecialArgs = {inherit inputs outputs;};
-  #   users.letrec = import ../../home.nix;
-  # };
 
   networking = {
     hostName = "let-rec";
