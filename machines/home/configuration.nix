@@ -24,6 +24,17 @@
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
 
+  security.polkit = {
+    enable = true;
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+          if (subject.isInGroup("wheel")) {
+              return polkit.Result.YES;
+          }
+      });
+    '';
+  };
+
   networking = {
     hostName = "let-rec";
     networkmanager.enable = true;
@@ -49,7 +60,7 @@
     };
     displayManager = {
       gdm.enable = true;
-      gdm.wayland = false;
+      gdm.wayland = true;
     };
     desktopManager.gnome = {
       enable = true;
@@ -157,10 +168,6 @@
     atomix
     seahorse
   ];
-
-  # programs.steam.enable = true;
-  # programs.steam.gamescopeSession.enable = true;
-  # programs.gamemode.enable = true;
 
   # programs.nix-data = {
   #   enable = true;

@@ -42,18 +42,18 @@
       lib = nixpkgs.lib // home-manager.lib;
 
       # This systems for xinux-module-manager
-      systems.modules.nixos = with inputs; [
-        nix-data.nixosModules.nix-data
-        xinux-modules.nixosModules.efiboot
-        xinux-modules.nixosModules.gnome
-        xinux-modules.nixosModules.kernel
-        xinux-modules.nixosModules.networking
-        xinux-modules.nixosModules.packagemanagers
-        xinux-modules.nixosModules.pipewire
-        xinux-modules.nixosModules.printing
-        xinux-modules.nixosModules.xinux
-        xinux-modules.nixosModules.metadata
-      ];
+      # systems.modules.nixos = with inputs; [
+      #   nix-data.nixosModules.nix-data
+      #   xinux-modules.nixosModules.efiboot
+      #   xinux-modules.nixosModules.gnome
+      #   xinux-modules.nixosModules.kernel
+      #   xinux-modules.nixosModules.networking
+      #   xinux-modules.nixosModules.packagemanagers
+      #   xinux-modules.nixosModules.pipewire
+      #   xinux-modules.nixosModules.printing
+      #   xinux-modules.nixosModules.xinux
+      #   xinux-modules.nixosModules.metadata
+      # ];
 
       nixosModules = import ./modules/nixos;
       homeModules = import ./modules/home;
