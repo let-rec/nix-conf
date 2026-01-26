@@ -68,7 +68,7 @@
   services.earlyoom.enable = true;
   services.earlyoom.freeMemThreshold = 5;
   services.thermald.enable = true;
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
