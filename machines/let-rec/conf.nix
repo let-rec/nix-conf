@@ -44,23 +44,25 @@
     # ];
   };
 
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us,ru";
-      options = "caps:escape,grp:alt_shift_toggle";
-      variant = "altgr-intl,,";
+  services = {
+    xserver = {
+      enable = true;
+      xkb = {
+        layout = "us,ru";
+        options = "caps:escape,grp:alt_shift_toggle";
+        variant = "altgr-intl,,";
+      };
+
+      videoDrivers = ["nvidia"];
+    };
+    desktopManager.gnome = {
+      enable = true;
     };
     displayManager = {
       gdm.enable = true;
       gdm.wayland = false;
     };
-    desktopManager.gnome = {
-      enable = true;
-    };
-    videoDrivers = ["nvidia"];
   };
-
   services.pcscd.enable = true;
   services.printing.enable = true;
   services.earlyoom.enable = true;
@@ -149,7 +151,7 @@
     fractal
     poedit
     github-desktop
-    pinentry
+    pinentry-curses
   ];
 
   environment.gnome.excludePackages = with pkgs; [

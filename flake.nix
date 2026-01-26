@@ -2,7 +2,7 @@
   description = "flakes for mac[H]ines";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -27,9 +27,7 @@
     nur,
     k,
     ...
-  } @ inputs:
-
-  let
+  } @ inputs: let
     mkPkgs = system:
       import nixpkgs {
         localSystem = {inherit system;};
@@ -77,7 +75,8 @@
           )
           ++ modules;
       };
-   /* mkDarwin = {
+    /*
+      mkDarwin = {
       system,
       hostname,
       username,
@@ -112,7 +111,8 @@
             }
           ]
           ++ modules;
-      };*/
+      };
+    */
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
