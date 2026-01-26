@@ -16,17 +16,17 @@
   boot.supportedFilesystems = ["ntfs"];
 
   # ACPI tweaks
-  boot.kernelParams = [
-    "acpi_osi="
-    "acpi_osi=Linux"
-  ];
-  programs.starship.enable = false;
-  nixpkgs.overlays = [
-    (self: super: {
-      python3 = super.python312;
-      python3Packages = super.python312Packages;
-    })
-  ];
+  # boot.kernelParams = [
+  #   "acpi_osi="
+  #   "acpi_osi=Linux"
+  # ];
+  # programs.starship.enable = false;
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     python3 = super.python312;
+  #     python3Packages = super.python312Packages;
+  #   })
+  # ];
 
   networking = {
     hostName = hostname;
@@ -103,29 +103,48 @@
     pinentryPackage = pkgs.pinentry-curses;
   };
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
+  # hardware.graphics = {
+  #   enable = true;
+  #   enable32Bit = true;
+  # };
 
-  hardware.nvidia = {
-    open = false;
-    modesetting.enable = true;
-    nvidiaSettings = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    prime = {
-      sync.enable = true;
-      offload.enable = false;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
+  # hardware.nvidia = {
+  #   open = false;
+  #   modesetting.enable = true;
+  #   nvidiaSettings = true;
+  #   powerManagement.enable = true;
+  #   powerManagement.finegrained = false;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   prime = {
+  #     sync.enable = true;
+  #     offload.enable = false;
+  #     intelBusId = "PCI:0:2:0";
+  #     nvidiaBusId = "PCI:1:0:0";
+  #   };
+  # };
+
+  # hardware.bluetooth.settings = {
+  #   General = {
+  #     Experimental = true;
+  #   };
+  # };
+
+  hardware = {
+    graphics = {
+      enable = true;
     };
-  };
 
-  hardware.bluetooth.settings = {
-    General = {
-      Experimental = true;
+    nvidia = {
+      open = false;
+      modesetting.enable = true;
+      nvidiaSettings = false;
+      powerManagement.enable = true;
+    };
+
+    bluetooth.settings = {
+      General = {
+        Experimental = true;
+      };
     };
   };
 
