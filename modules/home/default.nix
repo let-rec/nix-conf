@@ -9,5 +9,5 @@
   vscode = import ./vscode.nix { inherit pkgs; };
   bash = import ./bash.nix { inherit pkgs; };
   direnv = import ./direnv.nix { inherit pkgs; };
-  # firefox = import ./firefox.nix { inherit pkgs; };
+  firefox = import ./firefox.nix { inherit pkgs; };
 }

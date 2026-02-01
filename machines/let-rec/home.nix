@@ -13,7 +13,7 @@ in {
     fastfetch
     bash
     direnv
-    # firefox
+    firefox
   ];
 
   home.stateVersion = "24.11";
@@ -88,13 +88,13 @@ in {
     # baobab
     # smartmontools
     # gcolor3
-    # flameshot
+    flameshot
     # libqalculate
     # nfs-utils
-    # gnomeExtensions.appindicator
+    gnomeExtensions.appindicator
     # CLI
     # difftastic
-    # htop
+    htop
     # jq
     # ripgrep
     # rlwrap

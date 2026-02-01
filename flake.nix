@@ -14,6 +14,13 @@
     k.inputs.nixpkgs.follows = "nixpkgs";
     # apple-fonts.url = "path:pkgs/apple-fonts";
     # apple-fonts.inputs.nixpkgs.follows = "nixpkgs";
+    relago = {
+      url = "github:xinux-org/relago/bootstrap-relago-module";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-unstable.follows = "nixpkgs-unstable";
+      };
+    };
   };
 
   outputs = {

@@ -2,6 +2,7 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
+    mutableExtensionsDir = true;
     profiles.default = {
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
@@ -14,9 +15,18 @@
         bierner.markdown-mermaid
         pkief.material-icon-theme
         pkief.material-product-icons
+        jdinhlife.gruvbox
+        ocamllabs.ocaml-platform
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "markdowntable";
+          publisher = "takumii";
+          version = "0.11.0";
+          sha256 = "kn5aLRaxxacQMvtTp20IdTuiuc6xNU3QO2XbXnzSf7o=";
+        }
       ];
       userSettings = {
-        "files.autoSave" = "off";
+        "files.autoSave" = "on";
         "files.trimTrailingWhitespace"= true;
         "files.insertFinalNewline"=true;
         "editor.fontFamily"= "Iosevka, monospace";

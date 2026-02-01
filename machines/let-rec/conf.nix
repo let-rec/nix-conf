@@ -3,18 +3,20 @@
   hostname,
   username,
   config,
+  inputs,
   ...
 }: {
   imports = [
     ./hardware.nix
     ./modules.nix
+    inputs.relago.nixosModules.relago
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
-
+  # services.relago.enable = true;
   # ACPI tweaks
   # boot.kernelParams = [
   #   "acpi_osi="
@@ -27,6 +29,17 @@
   #     python3Packages = super.python312Packages;
   #   })
   # ];
+
+  security.polkit = {
+    enable = true;
+    extraConfig = ''
+      polkit.addRule(function(action, subject) {
+          if (subject.isInGroup("wheel")) {
+              return polkit.Result.YES;
+          }
+      });
+    '';
+  };
 
   networking = {
     hostName = hostname;
@@ -60,7 +73,7 @@
     };
     displayManager = {
       gdm.enable = true;
-      gdm.wayland = false;
+     #gdm.wayland = false;
     };
   };
   services.pcscd.enable = true;
@@ -164,7 +177,7 @@
     pulseaudio
     telegram-desktop
     keepassxc
-    firefox
+    # firefox
     gnome-builder
     zed-editor
     fractal
@@ -190,6 +203,7 @@
     hitori
     atomix
     seahorse
+    #adasdad
   ];
 
   system.stateVersion = "25.05";
