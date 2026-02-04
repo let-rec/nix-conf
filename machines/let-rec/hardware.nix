@@ -5,6 +5,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }: {
   imports = [
@@ -36,6 +37,47 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
+
+  systemd = {
+    services = {
+      # Uncertain if this is still required or not.
+      systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+
+      "gnome-suspend" = {
+        description = "suspend gnome shell";
+        before = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+          "nvidia-suspend.service"
+          "nvidia-hibernate.service"
+        ];
+        wantedBy = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = ''${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell'';
+        };
+      };
+      "gnome-resume" = {
+        description = "resume gnome shell";
+        after = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+          "nvidia-resume.service"
+        ];
+        wantedBy = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = ''${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell'';
+        };
+      };
+    };
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

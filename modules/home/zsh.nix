@@ -1,17 +1,16 @@
 {pkgs, ...}: {
-  # Installing zsh for system
   programs.zsh = {
     enable = true;
     # vteIntegration = true;
-    # enableCompletion = true;
+    enableCompletion = true;
     autosuggestion.enable = true;
     # enableBashCompletion = true;
     syntaxHighlighting.enable = true;
-    plugins= [{
-      name = "vi-mode";
-      src = pkgs.zsh-vi-mode;
-      file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-    }];
+    # plugins= [{
+    #   name = "vi-mode";
+    #   src = pkgs.zsh-vi-mode;
+    #   file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+    # }];
   };
 
   # history = {
@@ -23,9 +22,6 @@
   #   plugins = ["git"];
   #   theme = "robbyrussell";
   # };
-
-  # All users default shell must be zsh
-  # users.defaultUserShell = pkgs.zsh;
 
   # Automatic flake devShell loading
   # programs.direnv = {

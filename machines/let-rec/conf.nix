@@ -8,7 +8,6 @@
 }: {
   imports = [
     ./hardware.nix
-    ./modules.nix
     inputs.relago.nixosModules.relago
   ];
 
