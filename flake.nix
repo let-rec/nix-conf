@@ -156,6 +156,13 @@
             conf = ./machines/let-rec/conf.nix;
             home = ./machines/let-rec/home.nix;
           };
+          tower = mkNixos {
+            system = "x86_64-linux";
+            hostname = "tower";
+            username = "rec";
+            conf = ./machines/tower/config.nix;
+            home = ./machines/tower/home.nix;
+          };
         };
 
         # darwinConfigurations = {
