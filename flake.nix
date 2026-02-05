@@ -21,6 +21,10 @@
         nixpkgs-unstable.follows = "nixpkgs-unstable";
       };
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
