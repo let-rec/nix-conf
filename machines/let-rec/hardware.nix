@@ -17,18 +17,18 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/6b11180f-0935-4896-91d8-76b6a217bb1f";
-    fsType = "ext4";
-  };
+  # fileSystems."/" = {
+  #   device = "/dev/disk/by-uuid/6b11180f-0935-4896-91d8-76b6a217bb1f";
+  #   fsType = "ext4";
+  # };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6F46-206F";
-    fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
-  };
+  # fileSystems."/boot" = {
+  #   device = "/dev/disk/by-uuid/6F46-206F";
+  #   fsType = "vfat";
+  #   options = ["fmask=0077" "dmask=0077"];
+  # };
 
-  swapDevices = [];
+  # swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -38,46 +38,47 @@
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
-  systemd = {
-    services = {
-      # Uncertain if this is still required or not.
-      systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+  # This code might be fix nvidia sleep problem
+  # systemd = {
+  #   services = {
+  #     # Uncertain if this is still required or not.
+  #     systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
 
-      "gnome-suspend" = {
-        description = "suspend gnome shell";
-        before = [
-          "systemd-suspend.service"
-          "systemd-hibernate.service"
-          "nvidia-suspend.service"
-          "nvidia-hibernate.service"
-        ];
-        wantedBy = [
-          "systemd-suspend.service"
-          "systemd-hibernate.service"
-        ];
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = ''${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell'';
-        };
-      };
-      "gnome-resume" = {
-        description = "resume gnome shell";
-        after = [
-          "systemd-suspend.service"
-          "systemd-hibernate.service"
-          "nvidia-resume.service"
-        ];
-        wantedBy = [
-          "systemd-suspend.service"
-          "systemd-hibernate.service"
-        ];
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = ''${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell'';
-        };
-      };
-    };
-  };
+  #     "gnome-suspend" = {
+  #       description = "suspend gnome shell";
+  #       before = [
+  #         "systemd-suspend.service"
+  #         "systemd-hibernate.service"
+  #         "nvidia-suspend.service"
+  #         "nvidia-hibernate.service"
+  #       ];
+  #       wantedBy = [
+  #         "systemd-suspend.service"
+  #         "systemd-hibernate.service"
+  #       ];
+  #       serviceConfig = {
+  #         Type = "oneshot";
+  #         ExecStart = ''${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell'';
+  #       };
+  #     };
+  #     "gnome-resume" = {
+  #       description = "resume gnome shell";
+  #       after = [
+  #         "systemd-suspend.service"
+  #         "systemd-hibernate.service"
+  #         "nvidia-resume.service"
+  #       ];
+  #       wantedBy = [
+  #         "systemd-suspend.service"
+  #         "systemd-hibernate.service"
+  #       ];
+  #       serviceConfig = {
+  #         Type = "oneshot";
+  #         ExecStart = ''${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell'';
+  #       };
+  #     };
+  #   };
+  # };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
