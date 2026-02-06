@@ -159,8 +159,8 @@
           tower = mkNixos {
             system = "x86_64-linux";
             hostname = "tower";
-            username = "letrec";
-            conf = ./machines/tower/config.nix;
+            username = "rec";
+            conf = ./machines/tower/conf.nix;
             home = ./machines/tower/home.nix;
           };
         };

@@ -17,6 +17,9 @@
         pkief.material-product-icons
         jdinhlife.gruvbox
         ocamllabs.ocaml-platform
+        haskell.haskell
+        justusadam.language-haskell
+      # leanprover.lean4
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "markdowntable";
