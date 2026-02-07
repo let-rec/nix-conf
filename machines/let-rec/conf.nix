@@ -183,6 +183,7 @@
     poedit
     github-desktop
     pinentry-curses
+    qbittorrent
   ];
 
   environment.gnome.excludePackages = with pkgs; [
