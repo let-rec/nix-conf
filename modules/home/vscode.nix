@@ -19,6 +19,7 @@
         ocamllabs.ocaml-platform
         haskell.haskell
         justusadam.language-haskell
+
       # leanprover.lean4
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
@@ -44,7 +45,6 @@
         "window.menuBarVisibility"= "compact";
         "editor.minimap.enabled"= false;
         "editor.tabSize"= 2;
-        "haskell.manageHLS"= "GHCup";
         "workbench.colorTheme"= "Gruvbox Dark Hard";
         "workbench.productIconTheme"= "material-product-icons";
 
@@ -58,6 +58,17 @@
           "markdown"=false;
           "plaintext"= false;
           "scminput"= false;
+        };
+        "files.associations" = {
+          "*.hs" = "haskell";
+          "*.dump-simpl" = "haskell";
+          "*.dump-ds" = "haskell";
+          "*.project.local" = "haskell";
+        };
+        "haskell.manageHLS" = "PATH";
+        haskell = {
+              formattingProvider = "fourmolu";
+              manageHLS = "PATH";
         };
         "nix.enableLanguageServer"= true;
         "nix.serverPath"= "nixd";
