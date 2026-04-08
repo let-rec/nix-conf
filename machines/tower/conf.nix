@@ -10,7 +10,14 @@
   imports = [
     ./hardware.nix
     inputs.relago.nixosModules.relago
+    inputs.xinux-modules.nixosModules.branding
+    inputs.xinux-modules.nixosModules.gnome
+    inputs.xinux-modules.nixosModules.xinux
+    inputs.xinux-modules.nixosModules.kernel
+    # inputs.crashes.nixosModules.c-segfault
   ];
+
+  # services.xinux-c-segfault.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -56,6 +63,7 @@
     #   "all"
     # ];
   };
+  services.mullvad-vpn.enable = true;
 
   services = {
     xserver = {
@@ -158,6 +166,9 @@
     poedit
     github-desktop
     pinentry-curses
+    mullvad-vpn
+    mullvad
+    prismlauncher
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -176,7 +187,7 @@
     iagno
     hitori
     atomix
-    seahorse
+    # seahorse
     #adasdad
   ];
 
