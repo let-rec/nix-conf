@@ -9,7 +9,7 @@
 }: {
   imports = [
     ./hardware.nix
-    inputs.relago.nixosModules.relago
+    # inputs.relago.nixosModules.relago
     inputs.xinux-modules.nixosModules.branding
     inputs.xinux-modules.nixosModules.gnome
     inputs.xinux-modules.nixosModules.xinux

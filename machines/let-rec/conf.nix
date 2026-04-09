@@ -8,7 +8,7 @@
 }: {
   imports = [
     ./hardware.nix
-    inputs.relago.nixosModules.relago
+    # inputs.relago.nixosModules.relago
   ];
 
   boot.loader.systemd-boot.enable = true;
