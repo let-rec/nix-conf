@@ -8,6 +8,10 @@
 }: {
   imports = [
     ./hardware.nix
+    inputs.xinux-modules.nixosModules.branding
+    inputs.xinux-modules.nixosModules.gnome
+    inputs.xinux-modules.nixosModules.xinux
+    inputs.xinux-modules.nixosModules.kernel
     # inputs.relago.nixosModules.relago
   ];
 
@@ -202,8 +206,7 @@
     iagno
     hitori
     atomix
-    seahorse
-    #adasdad
+    # seahorse
   ];
 
   system.stateVersion = "25.05";
