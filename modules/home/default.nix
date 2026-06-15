@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  conf,
+  ...
 }: {
   # List your module files here
   fastfetch = import ./fastfetch.nix { inherit pkgs; };

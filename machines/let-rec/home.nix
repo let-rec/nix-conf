@@ -1,10 +1,11 @@
 {
   pkgs,
   lib,
+  conf,
   ...
 }: let
   inherit (lib.hm.gvariant) mkTuple mkUint32;
-  hp = import ../../modules/home {inherit pkgs lib;};
+  hp = import ../../modules/home {inherit pkgs lib conf;};
 in {
   imports = with hp; [
     vscode
@@ -16,7 +17,7 @@ in {
     firefox
   ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = "26.05";
 
   gtk = {
     enable = true;

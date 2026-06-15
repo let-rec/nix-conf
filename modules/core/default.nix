@@ -1,4 +1,7 @@
 {inputs, lib, config, ...}: {
+  imports = [
+    ./logitech.nix
+  ];
   # nix.registry.nixpkgs.flake = inputs.nixpkgs;
   nix = {
     enable = true;

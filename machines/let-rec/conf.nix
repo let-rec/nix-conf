@@ -2,7 +2,6 @@
   pkgs,
   hostname,
   username,
-  config,
   inputs,
   ...
 }: {
@@ -11,6 +10,7 @@
     inputs.xinux-modules.nixosModules.branding
     inputs.xinux-modules.nixosModules.gnome
     inputs.xinux-modules.nixosModules.xinux
+    inputs.xinux-modules.nixosModules.graphical
     inputs.xinux-modules.nixosModules.kernel
     # inputs.relago.nixosModules.relago
   ];
@@ -188,6 +188,7 @@
     github-desktop
     pinentry-curses
     qbittorrent
+    logiops
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -209,5 +210,5 @@
     # seahorse
   ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

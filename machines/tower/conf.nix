@@ -3,18 +3,20 @@
   pkgs,
   hostname,
   username,
-  config,
   inputs,
   ...
 }: {
   imports = [
     ./hardware.nix
-    # inputs.relago.nixosModules.relago
+    inputs.relago.nixosModules.relago
     inputs.xinux-modules.nixosModules.branding
     inputs.xinux-modules.nixosModules.gnome
     inputs.xinux-modules.nixosModules.xinux
+    inputs.xinux-modules.nixosModules.graphical
     inputs.xinux-modules.nixosModules.kernel
     # inputs.crashes.nixosModules.c-segfault
+
+    ../../modules/core/logitech.nix
   ];
 
   # services.xinux-c-segfault.enable = true;
@@ -23,7 +25,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
-  # services.relago.enable = true;
+  services.relago.enable = true;
   # ACPI tweaks
   # boot.kernelParams = [
   #   "acpi_osi="
@@ -64,7 +66,7 @@
     # ];
   };
   services.mullvad-vpn.enable = true;
-
+  # services.opensearch.enable = true;
   services = {
     xserver = {
       enable = true;
@@ -104,8 +106,11 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "relago" ]; # relago
   };
+  # users.groups.libvirtd.members = [ "your-account-here" ];
+  # users.groups.kvm.members = [ "your-account-here" ];
+
 
   virtualisation.docker.enable = true;
 
@@ -169,6 +174,16 @@
     mullvad-vpn
     mullvad
     prismlauncher
+    logiops
+    insomnia
+
+    # gnome-boxes
+    # dnsmasq
+
+    # # Nix
+    # nixpkgs-fmt
+    # nixd
+    # direnv
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -191,5 +206,5 @@
     #adasdad
   ];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

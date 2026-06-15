@@ -34,6 +34,8 @@
         "files.trimTrailingWhitespace"= true;
         "files.insertFinalNewline"=true;
         "editor.fontFamily"= "Iosevka, monospace";
+        "terminal.integrated.fontFamily" = "Iosevka, monospace";
+        "terminal.integrated.fontSize" = 17;
         "editor.wordWrap"= "on";
         "editor.fontSize"= 17;
         "editor.lineHeight"= 1.5;
@@ -89,6 +91,7 @@
             };
           };
         };
+      "rust-analyzer.server.path" = "rust-analyzer";
       };
     };
   };
