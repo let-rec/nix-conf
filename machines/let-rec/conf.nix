@@ -12,14 +12,14 @@
     inputs.xinux-modules.nixosModules.xinux
     inputs.xinux-modules.nixosModules.graphical
     inputs.xinux-modules.nixosModules.kernel
-    # inputs.relago.nixosModules.relago
+    inputs.relago.nixosModules.relago
   ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.swraid.enable = false;
   boot.supportedFilesystems = ["ntfs"];
-  # services.relago.enable = true;
+  services.relago.enable = true;
   # ACPI tweaks
   # boot.kernelParams = [
   #   "acpi_osi="
@@ -99,7 +99,7 @@
   users.defaultUserShell = pkgs.zsh;
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["networkmanager" "wheel" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker" "relago"];
   };
 
   virtualisation.docker.enable = true;
